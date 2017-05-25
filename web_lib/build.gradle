@@ -1,0 +1,71 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.2"
+
+    defaultConfig {
+        minSdkVersion 21
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+
+
+    /**
+     * This is a logger with a small, extensible API which provides utility on top of Android's normal Log class.
+     * This logger makes it possible, to make logging silent in release version.
+     *
+     * @see <a href="https://github.com/JakeWharton/timber">Timber Website</a>
+     */
+    compile 'com.jakewharton.timber:timber:4.5.1'
+
+    /**
+     * Gson is a Java library that can be used to convert Java Objects into their JSON representation.
+     * It can also be used to convert a JSON string to an equivalent Java object.
+     *
+     * @see <a href="https://github.com/google/gson">Gson Website</a>
+     */
+    compile 'com.google.code.gson:gson:2.8.0'
+
+    /**
+     * Provides GoogleMaps UI and related tools & utilities
+     *
+     * In this module only relevant for LatLng-Class
+     *
+     * @see <a href="https://developers.google.com/maps/documentation/android-api/start?hl=en">GoogleMaps Website</a>
+     */
+    compile 'com.google.android.gms:play-services-maps:10.2.6'
+
+    /**
+     * Required for generating:
+     *  -   equals
+     *  -   hashCode
+     *  -   toString
+     *
+     * @see <a href="https://commons.apache.org/proper/commons-lang/">CommonsLang Website</a>
+     */
+    compile 'commons-lang:commons-lang:2.6'
+
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+
+    compile 'com.android.support:appcompat-v7:25.3.1'
+    testCompile 'junit:junit:4.12'
+}

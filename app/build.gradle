@@ -1,0 +1,93 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+
+    compileSdkVersion 25
+    buildToolsVersion "25.0.2"
+
+    defaultConfig {
+
+        applicationId "com.example.poweranimal.letsgo"
+        minSdkVersion 21
+        targetSdkVersion 25
+        versionCode 1
+        versionName "0.0.1"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+    productFlavors {
+
+        demo {
+
+            versionName = "0.0.1-demo"
+        }
+
+        full {
+            //takes default values
+        }
+    }
+
+    buildTypes {
+
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    /**
+     * This is a logger with a small, extensible API which provides utility on top of Android's normal Log class.
+     * This logger makes it possible, to make logging silent in release version.
+     *
+     * @see <a href="https://github.com/JakeWharton/timber">Timber Website</a>
+     */
+    compile 'com.jakewharton.timber:timber:4.5.1'
+    /**
+     * JSR-310 was included in Java 8 as the java.time.* package.
+     * It is a full replacement for the ailing Date and Calendar APIs in both Java and Android.
+     * This library places the timezone information as a standard Android asset and provides a custom loader for parsing it efficiently.
+     *
+     * In the future the library may be replaced by java.time* package.
+     * But so far this is only avaialble for API 26 (Android O)
+     *
+     * @see <a href="https://github.com/JakeWharton/ThreeTenABP">ThreeTen Android Backport Website</a>
+     */
+    compile 'com.jakewharton.threetenabp:threetenabp:1.0.5'
+    testCompile('org.threeten:threetenbp:1.3.2') {
+        exclude group: 'com.jakewharton.threetenabp', module: 'threetenabp'
+    }
+
+    compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+
+    /**
+     * Used for UI testing.
+     *
+     * @see <a href="https://google.github.io/android-testing-support-library/docs/espresso/">Espresso Website</a>
+     */
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    /**
+     * Used for java/kotlin testing
+     *
+     * @see <a href="http://junit.org/junit4/">JUnit4 Website</a>
+     */
+    testCompile 'junit:junit:4.12'
+    /**
+     * Used for java/kotlin testing, especially for mocking classes
+     *
+     * @see <a href="http://site.mockito.org/">Mockito Website</a>
+     */
+    testCompile 'org.mockito:mockito-core:1.10.19'
+    compile project(':web_lib')
+}
+repositories {
+    mavenCentral()
+}
